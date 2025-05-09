@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pe.colegiodeabogados.puno.Icap.dtos.TipoColegiadoDTO;
+import pe.colegiodeabogados.puno.Icap.mappers.TipoColegiadoMapper;
 import pe.colegiodeabogados.puno.Icap.model.TipoColegiado;
 import pe.colegiodeabogados.puno.Icap.service.ITipoColegiadoService;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("/tipoColegiados")
 public class TipoColegiadoController {
     private final ITipoColegiadoService tipoColegiadoService;
+    private final TipoColegiadoMapper tipoColegiadoMapper;
     @GetMapping
     public ResponseEntity<List<TipoColegiado>> findAll() {
         List<TipoColegiado> list = tipoColegiadoService.findAll();
@@ -28,8 +31,8 @@ public class TipoColegiadoController {
         return ResponseEntity.ok(obj);
     }
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody TipoColegiado dto) {
-        TipoColegiado obj = tipoColegiadoService.save(dto);
+    public ResponseEntity<Void> save(@Valid @RequestBody TipoColegiadoDTO dto) {
+        TipoColegiado obj = tipoColegiadoService.save(tipoColegiadoMapper.toEntity(dto));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(
                 obj.getIdTipoColegiado()).toUri();
         return ResponseEntity.created(location).build();
