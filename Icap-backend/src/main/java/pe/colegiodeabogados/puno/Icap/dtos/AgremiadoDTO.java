@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.colegiodeabogados.puno.Icap.model.Agremiado;
 
 import java.time.LocalDate;
 
@@ -40,7 +41,7 @@ public class AgremiadoDTO {
 
     @NotNull(message = "El género no puede ser nulo")
     @Size(max = 10, message = "El género no debe exceder 10 caracteres")
-    private String genero;
+    private Agremiado.Genero genero;
 
     @NotNull(message = "La ciudad no puede ser nula")
     @Size(max = 50, message = "La ciudad no debe exceder 50 caracteres")

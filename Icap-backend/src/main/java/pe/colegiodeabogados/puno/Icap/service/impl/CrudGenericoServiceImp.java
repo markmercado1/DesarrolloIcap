@@ -1,9 +1,11 @@
 package pe.colegiodeabogados.puno.Icap.service.impl;
 
+import pe.colegiodeabogados.puno.Icap.exception.CustomErrorResponse;
 import pe.colegiodeabogados.puno.Icap.exception.ModelNotFoundException;
 import pe.colegiodeabogados.puno.Icap.repository.ICrudGenericRepository;
 import pe.colegiodeabogados.puno.Icap.service.ICrudGenericService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class CrudGenericoServiceImp<T,ID> implements
@@ -29,9 +31,14 @@ public abstract class CrudGenericoServiceImp<T,ID> implements
                 ModelNotFoundException("ID NOT FOUND: " + id));
     }
     @Override
-    public void delete(ID id) {
-        getRepo().findById(id).orElseThrow(() -> new
-                ModelNotFoundException("ID NOT FOUND: " + id));
+    public CustomErrorResponse delete(ID id) {
+        getRepo().findById(id).orElseThrow(() -> new ModelNotFoundException("ID NOT FOUND: " + id));
         getRepo().deleteById(id);
+        CustomErrorResponse cer=new CustomErrorResponse();
+        cer.setStatusCode(200);
+        cer.setDatetime(LocalDateTime.now());
+        cer.setMessage("true");
+        cer.setDetails("Todo Ok");
+        return cer;
     }
 }

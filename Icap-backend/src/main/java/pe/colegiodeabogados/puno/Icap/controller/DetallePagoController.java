@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pe.colegiodeabogados.puno.Icap.dtos.DetallePagoDTO;
+import pe.colegiodeabogados.puno.Icap.exception.CustomErrorResponse;
+import pe.colegiodeabogados.puno.Icap.mappers.DetallePagoMapper;
 import pe.colegiodeabogados.puno.Icap.model.DetallePago;
 import pe.colegiodeabogados.puno.Icap.service.IDetallePagoService;
 
@@ -16,35 +19,36 @@ import java.util.List;
 @RequestMapping("/detallePago")
 public class DetallePagoController {
     private final IDetallePagoService detallePagoService;
+    private final DetallePagoMapper detallePagoMapper;
     @GetMapping
-    public ResponseEntity<List<DetallePago>> findAll() {
-        List<DetallePago> list = detallePagoService.findAll();
+    public ResponseEntity<List<DetallePagoDTO>> findAll() {
+        List<DetallePagoDTO> list = detallePagoMapper.toDTOs(detallePagoService.findAll());
         return ResponseEntity.ok(list);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<DetallePago> findById(@PathVariable("id") Long
+    public ResponseEntity<DetallePagoDTO> findById(@PathVariable("id") Long
                                                       id) {
         DetallePago obj = detallePagoService.findById(id);
-        return ResponseEntity.ok(obj);
+        return ResponseEntity.ok(detallePagoMapper.toDTO(obj));
     }
     @PostMapping
-    public ResponseEntity<Void> save(@Valid @RequestBody DetallePago dto) {
-        DetallePago obj = detallePagoService.save(dto);
+    public ResponseEntity<Void> save(@Valid @RequestBody DetallePagoDTO.DetallePagoCADTo dto) {
+        DetallePagoDTO obj = detallePagoService.saveD(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(
                 obj.getIdDetallePago()).toUri();
         return ResponseEntity.created(location).build();
     }
     @PutMapping("/{id}")
-    public ResponseEntity<DetallePago> update(@PathVariable("id") Long
-                                                    id, @RequestBody
-                                            DetallePago dto) {
-        dto.setIdDetallePago(id);
-        DetallePago obj = detallePagoService.update(id, dto);
+    public ResponseEntity<DetallePagoDTO> update(@Valid @RequestBody DetallePagoDTO.DetallePagoCADTo dto,
+                                                     @PathVariable("id") Long  id) {
+
+        DetallePagoDTO obj = detallePagoService.updateD(dto,id);
         return ResponseEntity.ok(obj);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-        detallePagoService.delete(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<CustomErrorResponse> delete(@PathVariable("id") Long id) {
+        CustomErrorResponse response = detallePagoService.delete(id);
+        return ResponseEntity.ok(response);
     }
+
 }

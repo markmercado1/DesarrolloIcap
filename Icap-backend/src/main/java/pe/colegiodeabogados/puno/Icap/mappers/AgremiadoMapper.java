@@ -14,5 +14,5 @@ public interface AgremiadoMapper extends GenericMapper<AgremiadoDTO, Agremiado> 
     @Mapping(target = "tipoColegiado", ignore = true)
     @Mapping(target = "estadoColegiado", ignore = true)
     @Mapping(target = "trabajador", ignore = true)
-    Agremiado toEntityFromCADTO(AgremiadoDTO.AgremiadoCADto productoCrearDTO);
+    Agremiado toEntityFromCADTO(AgremiadoDTO.AgremiadoCADto agremiadoCrearDTO);
 }
