@@ -1,1 +1,93 @@
-<p>agremiado-main works!</p>
+<div class="agremiado-container">
+  <mat-form-field class="inputField" appearance="outline">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar agremiado..." />
+    <button mat-icon-button matSuffix *ngIf="dataSource.filter" (click)="applyFilter({ target: { value: '' } })">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="full-width-table">
+
+      <!-- DNI -->
+      <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+        <td mat-cell *matCellDef="let row">{{ row.dni }}</td>
+      </ng-container>
+
+      <!-- Nombres -->
+      <ng-container matColumnDef="aNombres">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombres</th>
+        <td mat-cell *matCellDef="let row">{{ row.aNombres }}</td>
+      </ng-container>
+
+      <!-- Apellido Paterno -->
+      <ng-container matColumnDef="aApellidoPaterno">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido Paterno</th>
+        <td mat-cell *matCellDef="let row">{{ row.aApellidoPaterno }}</td>
+      </ng-container>
+
+      <!-- Apellido Materno -->
+      <ng-container matColumnDef="aApellidoMaterno">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido Materno</th>
+        <td mat-cell *matCellDef="let row">{{ row.aApellidoMaterno }}</td>
+      </ng-container>
+
+      <!-- Celular -->
+      <ng-container matColumnDef="aCelular">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
+        <td mat-cell *matCellDef="let row">{{ row.aCelular }}</td>
+      </ng-container>
+
+      <!-- Correo -->
+      <ng-container matColumnDef="aCorreo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+        <td mat-cell *matCellDef="let row">{{ row.aCorreo }}</td>
+      </ng-container>
+
+      <!-- Género -->
+      <ng-container matColumnDef="genero">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Género</th>
+        <td mat-cell *matCellDef="let row">{{ row.genero }}</td>
+      </ng-container>
+
+      <!-- Ciudad -->
+      <ng-container matColumnDef="aCiudad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
+        <td mat-cell *matCellDef="let row">{{ row.aCiudad }}</td>
+      </ng-container>
+
+      <!-- Tipo de Colegiado -->
+      <ng-container matColumnDef="tipoColegiado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de Colegiado</th>
+        <td mat-cell *matCellDef="let row">{{ row.tipoColegiado }}</td>
+      </ng-container>
+
+      <!-- Estado de Colegiado -->
+      <ng-container matColumnDef="estadoColegiado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado de Colegiado</th>
+        <td mat-cell *matCellDef="let row">{{ row.estadoColegiado }}</td>
+      </ng-container>
+
+      <!-- Acción -->
+      <ng-container matColumnDef="accion">
+        <th mat-header-cell *matHeaderCellDef>Acción</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" aria-label="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="delete(row.idAgremiado)" aria-label="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Encabezado y filas -->
+      <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+      <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+    </table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

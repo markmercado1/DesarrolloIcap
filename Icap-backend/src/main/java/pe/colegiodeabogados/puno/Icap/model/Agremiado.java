@@ -42,7 +42,7 @@ public class Agremiado {
     @Column(nullable = false, length = 30)
     private String aCelular;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 160)
     private String aCorreo;
 
     @Column(nullable = false, length = 100)

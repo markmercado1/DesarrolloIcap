@@ -19,7 +19,7 @@ export class AgremiadoService extends GenericService<Agremiado> {
   agremiadoSeleccionado$ = this.agremiadoSeleccionadoSubject.asObservable();
 
   constructor(protected override http: HttpClient) {
-    super(http, `${environment.HOST}/agremiados`);
+    super(http, `${environment.HOST}/api/vista-agremiados`);
   }
 
   // Cargar todos los Agremiados enriquecidos (tipo Report)

@@ -82,9 +82,9 @@
 		<!-- Oracle DB (comentado por si se necesita en el futuro) -->
 		<!--
         <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc11</artifactId>
-            <scope>runtime</scope>
+          <groupId>com.oracle.database.jdbc</groupId>
+          <artifactId>ojdbc11</artifactId>
+          <scope>runtime</scope>
         </dependency>
         -->
 
@@ -101,11 +101,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<!-- Necesario desde Spring Boot 2.3 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 	</dependencies>
 

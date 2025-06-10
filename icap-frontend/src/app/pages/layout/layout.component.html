@@ -1,0 +1,84 @@
+<div class="example-container">
+  <mat-toolbar class="example-toolbar">
+    <button
+      class="myButton no-border"
+      mat-icon-button
+      (click)="sidenav.toggle()"
+    >
+      @if (!sidenav.opened) {
+        <mat-icon>menu</mat-icon>
+      } @else {
+        <mat-icon>close</mat-icon>
+      }
+    </button>
+    <span>Icap</span>
+    <span class="example-spacer"></span>
+    <span class="example-spacer"> </span>
+
+    <button class="no-border" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>account_box</mat-icon>
+        <span>My account</span>
+      </button>
+      <button mat-menu-item (click)="sidenav.opened = false" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #sidenav style="width: 250px" mode="over">
+      <img src="Insignia.png" width="128" style="margin-left: 20px" />
+
+      <mat-divider></mat-divider>
+
+      <!-- Pagos -->
+      <button
+        class="myButton"
+        mat-menu-item
+        (click)="sidenav.toggle()"
+        routerLink="/pages/dashboard"
+        [routerLinkActive]="['active']"
+        style="cursor: pointer"
+      >
+        <mat-icon>payments</mat-icon>
+        <span>Pagos</span>
+      </button>
+
+      <!-- Agremiados -->
+      <button
+        class="myButton"
+        mat-menu-item
+        (click)="sidenav.toggle()"
+        routerLink="/pages/agremiados"
+        [routerLinkActive]="['active']"
+        style="cursor: pointer"
+      >
+        <mat-icon>groups</mat-icon>
+        <span>Agremiados</span>
+      </button>
+
+      <!-- Eventos -->
+      <button
+        class="myButton"
+        mat-menu-item
+        (click)="sidenav.toggle()"
+        routerLink="/pages/evento"
+        [routerLinkActive]="['active']"
+        style="cursor: pointer"
+      >
+        <mat-icon>event</mat-icon>
+        <span>Eventos</span>
+      </button>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet />
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

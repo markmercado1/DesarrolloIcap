@@ -1,1 +1,102 @@
 <p>eventoo-main works!</p>
+
+<header>
+  <h1>Editar Evento</h1>
+</header>
+
+<div class="container">
+  <h2>Modificar información del evento</h2>
+
+  <form>
+    <label for="titulo">Título del evento</label>
+    <input type="text" id="titulo" name="titulo" value="Conferencia Legal 2025" />
+
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion" name="descripcion" rows="5">
+Evento académico para agremiados del colegio sobre temas legales actuales.
+    </textarea>
+
+    <label for="fecha">Fecha</label>
+    <input type="date" id="fecha" name="fecha" value="2025-07-15" />
+
+    <label for="hora">Hora</label>
+    <input type="time" id="hora" name="hora" value="09:00" />
+
+    <label for="ubicacion">Ubicación</label>
+    <input type="text" id="ubicacion" name="ubicacion" value="Auditorio Principal del Colegio" />
+
+    <label for="archivo">Archivo adjunto (opcional)</label>
+    <input type="file" id="archivo" name="archivo" />
+
+    <button type="submit">Guardar Cambios</button>
+  </form>
+</div>
+
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f7fa;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: #2f790d;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    color: #2f790d;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    margin-top: 1rem;
+    color: #333;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  button {
+    margin-top: 2rem;
+    background-color: #2f790d;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #2f790d;
+  }
+</style>
