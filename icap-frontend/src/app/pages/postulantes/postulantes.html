@@ -1,0 +1,92 @@
+<!-- postulantes.component.html -->
+<header>
+  <img src="assets/logo.png" alt="Logo Colegio" class="logo" />
+  <h1>Registro de Postulantes</h1>
+</header>
+
+<!-- Formulario para agregar -->
+<section class="formulario-agregar">
+  <h2>Agregar Nuevo Postulante</h2>
+  <form (ngSubmit)="agregarPostulante()" #formAgregar="ngForm">
+    <div class="form-control">
+      <input type="text" id="nombre" required [(ngModel)]="nuevoPostulante.nombre" name="nombre" />
+      <label>Nombre</label>
+    </div>
+
+    <div class="form-control">
+      <input type="text" id="apellidos" required [(ngModel)]="nuevoPostulante.apellidos" name="apellidos" />
+      <label>Apellidos</label>
+    </div>
+
+    <div class="form-control">
+      <input type="text" id="dni" required [(ngModel)]="nuevoPostulante.dni" name="dni" />
+      <label>DNI</label>
+    </div>
+
+    <div class="form-control">
+      <input type="text" id="telefono" required [(ngModel)]="nuevoPostulante.telefono" name="telefono" />
+      <label>Teléfono</label>
+    </div>
+
+    <div class="form-control">
+      <input type="text" id="direccion" required [(ngModel)]="nuevoPostulante.direccion" name="direccion" />
+      <label>Dirección</label>
+    </div>
+
+    <div class="form-control">
+      <select id="estado" required [(ngModel)]="nuevoPostulante.estado" name="estado">
+        <option value="Activo">Activo</option>
+        <option value="Inactivo">Inactivo</option>
+      </select>
+    </div>
+
+    <button type="submit" class="button2">Registrar</button>
+  </form>
+</section>
+
+<!-- Tabla de postulantes -->
+<section class="tabla-container">
+  <h2>Lista de Postulantes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>DNI</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let postulante of postulantes">
+        <td>{{ postulante.nombre }} {{ postulante.apellidos }}</td>
+        <td>{{ postulante.dni }}</td>
+        <td>{{ postulante.estado }}</td>
+        <td>
+          <button (click)="editarPostulante(postulante)">Editar</button>
+          <button (click)="eliminarPostulante(postulante)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Edición -->
+<section class="detalle-agremiado" *ngIf="postulanteEditando">
+  <h2>Editar Información de {{ postulanteEditando.nombre }}</h2>
+  <form (ngSubmit)="guardarCambios()">
+    <input type="text" [(ngModel)]="postulanteEditando.nombre" name="editNombre" required />
+    <input type="text" [(ngModel)]="postulanteEditando.apellidos" name="editApellidos" required />
+    <input type="text" [(ngModel)]="postulanteEditando.dni" name="editDni" required />
+    <input type="text" [(ngModel)]="postulanteEditando.telefono" name="editTelefono" required />
+    <input type="text" [(ngModel)]="postulanteEditando.direccion" name="editDireccion" required />
+    <input type="text" [(ngModel)]="postulanteEditando.colegiatura" name="editColegiatura" />
+    <input type="text" [(ngModel)]="postulanteEditando.area" name="editArea" />
+    <input type="text" [(ngModel)]="postulanteEditando.cargo" name="editCargo" />
+    <input type="text" [(ngModel)]="postulanteEditando.calificaciones" name="editCalificaciones" />
+    <select [(ngModel)]="postulanteEditando.estado" name="editEstado">
+      <option value="Activo">Activo</option>
+      <option value="Inactivo">Inactivo</option>
+    </select>
+    <button type="submit">Guardar Cambios</button>
+  </form>
+</section>
